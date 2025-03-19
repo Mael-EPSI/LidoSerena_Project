@@ -35,10 +35,10 @@ cd LidoSerena_Project
 - Redémarrer les services WAMP
 
 4. **Vérification de l'installation**
-- Accéder à l'application via: http://localhost/LidoSerena
-- Interface admin: http://localhost/lidoserena/rassou/admin/index.php
-- Interface Serveur: http://localhost/lidoserena/nathan/tablette.html
-- Interface Cuisine: http://localhost/lidoserena/hanine/cuisine.html
+- Accéder à l'application via: http://localhost/LidoSerena_Project/lidoserena
+- Interface admin: http://localhost/LidoSerena_Project/lidoserena/rassou/admin/index.php
+- Interface Serveur: http://localhost/LidoSerena_Project/lidoserena/nathan/tablette.html
+- Interface Cuisine: http://localhost/LidoSerena_Project/lidoserena/hanine/cuisine.html
 
 
 ---

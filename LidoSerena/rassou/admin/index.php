@@ -51,11 +51,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ajouter'])) {
     $plat = htmlspecialchars($_POST['plat']);
     $prix = floatval($_POST['prix']);
     $description = htmlspecialchars($_POST['description']);
+    $categorie_id = intval($_POST['categorie_id']); // Ajout de la catégorie
     
-    if (!empty($plat) && !empty($prix) && !empty($description)) {
-        $sql = "INSERT INTO produits (nom, prix, description) VALUES (?, ?, ?)";
+    if (!empty($plat) && !empty($prix) && !empty($description) && $categorie_id > 0) {
+        $sql = "INSERT INTO produits (nom, prix, description, categorie_id) VALUES (?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sds", $plat, $prix, $description);
+        $stmt->bind_param("sdsi", $plat, $prix, $description, $categorie_id);
         if ($stmt->execute()) {
             echo "<p class='success'>Plat ajouté avec succès!</p>";
         } else {
@@ -63,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ajouter'])) {
         }
         $stmt->close();
     } else {
-        echo "<p class='error'>Tous les champs doivent être remplis.</p>";
+        echo "<p class='error'>Tous les champs doivent être remplis et une catégorie doit être sélectionnée.</p>";
     }
 }
 
@@ -155,6 +156,10 @@ $result = $conn->query($sql);
 // Récupération des menus avec leurs informations
 $sqlMenus = "SELECT * FROM menus ORDER BY nom ASC";
 $resultMenus = $conn->query($sqlMenus);
+
+// Avant le formulaire d'ajout, ajouter la récupération des catégories
+$sqlCategories = "SELECT * FROM categories ORDER BY nom";
+$resultCategories = $conn->query($sqlCategories);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -294,6 +299,16 @@ $resultMenus = $conn->query($sqlMenus);
         <input type="text" name="plat" placeholder="Nom du plat" required><br><br>
         <input type="number" step="0.01" name="prix" placeholder="Prix" required><br><br>
         <textarea name="description" placeholder="Description" required></textarea><br><br>
+        <select name="categorie_id" required>
+            <option value="">Sélectionner une catégorie</option>
+            <?php
+            if ($resultCategories && $resultCategories->num_rows > 0) {
+                while($cat = $resultCategories->fetch_assoc()) {
+                    echo "<option value='" . $cat['id'] . "'>" . htmlspecialchars($cat['nom']) . "</option>";
+                }
+            }
+            ?>
+        </select><br><br>
         <input type="submit" name="ajouter" value="Ajouter">
     </form>
 
