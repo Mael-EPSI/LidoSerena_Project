@@ -1,4 +1,4 @@
-# 📌 Lido Serena -
+# 📌 Lido Serena - Système de Gestion des Commandes et des Stocks
 
 ## 📖 Introduction
 Le restaurant de plage **Lido Serena** souhaite moderniser son système de prise de commande afin d'éviter les erreurs et améliorer l'efficacité du service. Cette application permet aux serveurs de prendre les commandes directement via une **tablette**, d'envoyer les commandes en cuisine et de gérer les paiements des clients. 
@@ -19,8 +19,7 @@ Une interface administrateur permet de **modifier les plats, menus et boissons**
 ### Étapes d'installation
 
 1. **Cloner le projet**
-- Aller le répertoire `www` de WAMP
-- Ouvrir le fichier `www` avec VSCode et ouvrire un terminal
+- Créer un dossier dans le répertoire `www` de WAMP
 ```bash
 git clone https://github.com/Mael-EPSI/LidoSerena_Project.git
 cd LidoSerena_Project
@@ -170,6 +169,20 @@ La gestion du projet a été réalisée avec **Notion**.
 - Estimation du temps
 
 Lien vers le Notion : [Notion du projet](https://www.notion.so/1982b74476ac80e1a2a1fa55a15f18c9?v=1982b74476ac817abba6000cd4b42d08&pvs=4)
+
+---
+
+## 🚧 Difficultés Rencontrées
+
+### 1️⃣ Gestion des notifications en temps réel
+- Faire le systeme de notification entre Tablette et Cuisine
+
+### 2️⃣ Synchronisation des données
+- Connection a la Base de Donnée lorsque elle etait hébergé, apres de multituple essaies, de temps et quelque solutions trouver a certain problème. Nous avons toujours eu un problème avec la connexion en Mysql disant, il fallait obligatoirement donner l'adresse IP public a l'ajouter a la WhiteListe meme en utilisant les caractères générique.
+
+### 3️⃣ Interface Administrateur
+- Affichage des graphs
+- Gestion des menus / Produits 
 
 ---
 
