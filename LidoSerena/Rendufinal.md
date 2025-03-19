@@ -19,7 +19,8 @@ Une interface administrateur permet de **modifier les plats, menus et boissons**
 ### Étapes d'installation
 
 1. **Cloner le projet**
-- Créer un dossier dans le répertoire `www` de WAMP
+- Aller le répertoire `www` de WAMP
+- Ouvrir le fichier `www` avec VSCode et ouvrire un terminal
 ```bash
 git clone https://github.com/Mael-EPSI/LidoSerena_Project.git
 cd LidoSerena_Project
