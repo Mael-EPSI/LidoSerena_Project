@@ -25,7 +25,7 @@ cd LidoSerena
 ```
 
 2. **Configuration de la base de données**
-- Ouvrir phpMyAdmin (http://localhost/phpmyadmin)
+- Ouvrir phpMyAdmin ([http://localhost/phpmyadmin](https://github.com/Mael-EPSI/LidoSerena_Project.git))
 - Créer une nouvelle base de données nommée "lidoserena"
 - Importer le fichier `database.sql` fourni
 
