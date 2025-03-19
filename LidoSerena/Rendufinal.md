@@ -1,4 +1,4 @@
-# 📌 Lido Serena - Système de Gestion des Commandes et des Stocks
+# 📌 Lido Serena -
 
 ## 📖 Introduction
 Le restaurant de plage **Lido Serena** souhaite moderniser son système de prise de commande afin d'éviter les erreurs et améliorer l'efficacité du service. Cette application permet aux serveurs de prendre les commandes directement via une **tablette**, d'envoyer les commandes en cuisine et de gérer les paiements des clients. 
