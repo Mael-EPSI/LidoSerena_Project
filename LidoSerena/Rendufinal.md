@@ -19,15 +19,16 @@ Une interface administrateur permet de **modifier les plats, menus et boissons**
 ### Étapes d'installation
 
 1. **Cloner le projet**
+- Créer un dossier dans le répertoire `www` de WAMP
 ```bash
 git clone https://github.com/Mael-EPSI/LidoSerena_Project.git
-cd LidoSerena
+cd LidoSerena_Project
 ```
 
 2. **Configuration de la base de données**
 - Ouvrir phpMyAdmin (http://localhost/phpmyadmin)
 - Créer une nouvelle base de données nommée "lidoserena"
-- Importer le fichier `database.sql` fourni
+- Importer le fichier `lidoserena.sql` fourni
 
 3. **Configuration du serveur web**
 - Placer le dossier du projet dans le répertoire `www` de WAMP
