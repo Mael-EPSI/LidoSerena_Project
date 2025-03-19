@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tableau de bord du Restaurant</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Plats Italiens les plus commandés</h1>
+    <div class="chart-container">
+      <canvas id="dishesChart"></canvas>
+    </div>
+  
+    <script>
+      // Données des plats
+      const plats = ["Spaghetti Carbonara", "Lasagne", "Tiramisu", "Bruschetta", "Pizza Margherita", "Cannoli"];
+      const commandes = [45, 30, 20, 15, 50, 10]; // Exemple de données (nombre de commandes)
+  
+      // Configuration du diagramme
+      const ctx = document.getElementById('dishesChart').getContext('2d');
+      const dishesChart = new Chart(ctx, {
+        type: 'pie', // Type de diagramme (camembert)
+        data: {
+          labels: plats, // Noms des plats
+          datasets: [{
+            data: commandes, // Nombre de commandes
+            backgroundColor: [
+              '#FF6384', // Couleur pour Spaghetti Carbonara
+              '#36A2EB', // Couleur pour Lasagne
+              '#FFCE56', // Couleur pour Tiramisu
+              '#4BC0C0', // Couleur pour Bruschetta
+              '#9966FF', // Couleur pour Pizza Margherita
+              '#FF9F40', // Couleur pour Cannoli
+            ],
+            hoverOffset: 4, // Effet de survol
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'bottom', // Position de la légende
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  const label = context.label || '';
+                  const value = context.raw || 0;
+                  return `${label}: ${value} commandes`;
+                }
+              }
+            }
+          }
+        }
+      });
+    </script>
+
+    <!-- Section 2 : Courbe d'évolution des clients -->
+    <section class="clients-evolution">
+      <h2>Nombre de clients par mois</h2>
+      <canvas id="clientsChart"></canvas>
+    </section>
+
+    <!-- Section 3 : Diagramme à barres du panier moyen -->
+    <section class="average-basket">
+      <h2>Panier moyen par jour</h2>
+      <canvas id="basketChart"></canvas>
+    </section>
+
+    <!-- Section 4 : Chiffre d'affaires -->
+    <section class="revenue">
+      <h2>Chiffre d'affaires du mois</h2>
+      <p class="revenue-amount">25 000 €</p>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>

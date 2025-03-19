@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Cuisine - Commandes en cours</title>
+  <link rel="stylesheet" href="https://use.typekit.net/lfx5uzg.css">
+  <style>
+    body {
+        background-color: #DDFFF7;
+        font-family: 'coolvetica';
+        color: #93E1D8;
+        text-align: center;
+      }
+    .commande {
+      border: 3px solid #93E1D8;
+      margin: 10px;
+      padding: 15px;
+      border-radius: 8px;
+      background-color: #eafffa;
+      /*proper css*/
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 10px;
+      border-radius: 8px;
+    }
+
+    th,
+    td {
+      border: 3px solid #93E1D8;
+      border-radius: 8px;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #eafffa;
+    }
+
+  
+    h1 {
+      font-family: "revla-slab";
+      font-size: 70px;
+      color: #84CAC2;
+    }
+
+    .commande h2 {
+      margin: 0 0 10px;
+    }
+
+    .commande p {
+      margin: 5px 0;
+    }
+
+    button {
+      color: #588781;
+      font-family: 'coolvetica';
+      padding: 8px 12px;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 12px;
+      border-color: #588781;
+    }
+  </style>
+  <script type="module">
+    import { API_BASE_URL } from '../config.js';
+    window.API_BASE_URL = API_BASE_URL;
+  </script>
+</head>
+<body>
+  <h1>Commandes en cours</h1>
+  <div id="commandes-container"></div>
+
+  <script>
+    // Fonction pour charger les commandes via l'API
+    function chargerCommandes() {
+      fetch(`${window.API_BASE_URL}/get_tout_produit.php`)
+        .then(response => response.json())
+        .then(data => {
+          console.log("Réponse API:", data);
+          if (data.success) {
+            afficherCommandes(data.commandes);
+          } else {
+            console.error("Erreur API:", data.message);
+          }
+        })
+        .catch(error => console.error("Erreur fetch:", error));
+    }
+
+    // Fonction pour afficher les commandes
+    function afficherCommandes(commandes) {
+      const container = document.getElementById("commandes-container");
+      container.innerHTML = "";
+      commandes.forEach(commande => {
+        // Afficher uniquement les commandes en cours
+        if (commande.statut !== "en cours") return;
+
+        let html = `
+          <div class="commande">
+            <div class="commande-header">
+              <h2>Table ${commande.table_id} - Commande #${commande.commande_id}</h2>
+              <button onclick="markCommandePret(${commande.commande_id})">Marquer la commande comme prête</button>
+            </div>
+            <p>Statut global : ${commande.statut}</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Produit</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+        `;
+        // Affiche chaque produit dont le statut n'est pas "pret"
+        commande.produits.forEach(prod => {
+          if (prod.statut !== "pret") {
+            html += `
+              <tr>
+                <td>${prod.nom}</td>
+                <td>
+                  <button onclick="marquerProduitPret(${commande.commande_id}, ${prod.line_id}, '${prod.mode}')">Prêt</button>
+                </td>
+              </tr>
+            `;
+          }
+        });
+        html += `
+              </tbody>
+            </table>
+          </div>
+        `;
+        container.insertAdjacentHTML("beforeend", html);
+      });
+    }
+
+    // Fonction pour marquer un produit individuel comme prêt
+    function marquerProduitPret(commandeId, lineId, mode) {
+      const payload = {
+        commande_id: commandeId,
+        line_id: lineId,
+        mode: mode  // "normal" ou "menu"
+      };
+
+      fetch(`${window.API_BASE_URL}/marquer_produit_pret.php`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert("Produit marqué comme prêt !");
+          chargerCommandes();
+        } else {
+          alert("Erreur: " + data.message);
+        }
+      })
+      .catch(error => console.error("Erreur fetch:", error));
+    }
+
+    // Fonction pour marquer toute la commande comme prête
+    function markCommandePret(commandeId) {
+      const payload = { commande_id: commandeId };
+      fetch(`${window.API_BASE_URL}/marquer_commande_pret.php`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert("Commande marquée comme prête !");
+          chargerCommandes();
+        } else {
+          alert("Erreur: " + data.message);
+        }
+      })
+      .catch(error => console.error("Erreur fetch:", error));
+    }
+
+    // Charger les commandes dès le chargement de la page
+    document.addEventListener("DOMContentLoaded", chargerCommandes);
+  </script>
+</body>
+</html>

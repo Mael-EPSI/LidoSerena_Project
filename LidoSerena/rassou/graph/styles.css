@@ -1,0 +1,56 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  .chart-container {
+    max-width: 80%;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+  
+
+  .clients-evolution {
+    margin-top: 40px;
+    text-align: center;
+  }
+  
+  .clients-evolution h2 {
+    color: #333;
+  }
+  
+
+  .average-basket {
+    margin-top: 40px;
+    text-align: center;
+  }
+  
+  .average-basket h2 {
+    color: #333;
+  }
+
+  .revenue {
+    margin-top: 40px;
+    text-align: center;
+  }
+  
+  .revenue h2 {
+    color: #333;
+  }
+  
+  .revenue-amount {
+    font-size: 24px;
+    font-weight: bold;
+    color: #151815;
+  }

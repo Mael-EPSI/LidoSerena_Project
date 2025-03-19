@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="tablette.css" />
+    <title>Tablette</title>
+</head>
+
+<body id="body">
+    <h1 class="entreprise">Pizza de la mama</h1>
+    <div class="contenair">
+        <div class="divGauche">
+            <div>
+                <button class="table" onclick="showSection('section1')">1</button>
+                <button class="table" onclick="showSection('section2')">2</button>
+                <button class="table" onclick="showSection('section3')">3</button>
+                <button class="table" onclick="showSection('section4')">4</button>
+                <button class="table" onclick="showSection('section5')">5</button>
+                <button class="table" onclick="showSection('section6')">6</button>
+            </div>
+            <!-- Pop-up pour la sélection des plats du menu -->
+            <div id="menu-popup" class="popup">
+                <div class="popup-content">
+                    <h2 id="popup-title">Choisissez vos plats</h2>
+                    <div id="popup-options"></div>
+                    <button id="popup-confirm">Valider</button>
+                    <button id="popup-close">Annuler</button>
+                </div>
+            </div>
+
+            <p class="separateur">━┅━┅━┅━┅━┅━┅━┅━┅━┅━━┅━┅━┅━┅━┅━┅━┅━┅━┅━┅━┅━┅━</p>
+            <p class> MENUS </p>
+
+            <div id="menus-container">
+                <p>Chargement des menus...</p>
+            </div>
+
+            <p class="separateur">━┅━┅━┅━┅━┅━┅━┅━┅━┅━━┅━┅━┅━┅━┅━┅━┅━┅━┅━┅━┅━┅━</p>
+
+            <div id="produits-container">
+                <p>Chargement des produits...</p>
+            </div>
+
+        </div>
+        <div class="divDroite">
+            <div id="section1" class="section active" data-table-id="1">
+                <h2>Table 1</h2>
+                <div class="sidebar 1">
+                    <h1>Commande</h1>
+                    <div class="commande"></div>
+                    <div class="total">Total : 0€</div>
+                    <div class="buttons">
+                        <button class="envoyer-commande-btn">Valider</button>
+                        <button class="payer-btn">Payer</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="section2" class="section" data-table-id="2">
+                <h2>Table 2</h2>
+                <div class="sidebar 2">
+                    <h1>Commande</h1>
+                    <div class="commande"></div>
+                    <div class="total">Total : 0€</div>
+                    <div class="buttons">
+                        <button class="envoyer-commande-btn">Valider</button>
+                        <button class="payer-btn">Payer</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="section3" class="section"data-table-id="3">
+                <h2>Table 3</h2>
+                <div class="sidebar 3">
+                    <h1>Commande</h1>
+                    <div class="commande"></div>
+                    <div class="total">Total : 0€</div>
+                    <div class="buttons">
+                        <button class="envoyer-commande-btn">Valider</button>
+                        <button class="payer-btn">Payer</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="section4" class="section" data-table-id="4">
+                <h2>Table 4</h2>
+                <div class="sidebar 4">
+                    <h1>Commande</h1>
+                    <div class="commande"></div>
+                    <div class="total">Total : 0€</div>
+                    <div class="buttons">
+                        <button class="envoyer-commande-btn">Valider</button>
+                        <button class="payer-btn">Payer</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="section5" class="section" data-table-id="5">
+                <h2>Table 5</h2>
+                <div class="sidebar 5">
+                    <h1>Commande</h1>
+                    <div class="commande"></div>
+                    <div class="total">Total : 0€</div>
+                    <div class="buttons">
+                        <button class="envoyer-commande-btn">Valider</button>
+                        <button class="payer-btn">Payer</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="section6" class="section" data-table-id="6">
+                <h2>Table 6</h2>
+                <div class="sidebar 6">
+                    <h1>Commande</h1>
+                    <div class="commande"></div>
+                    <div class="total">Total : 0€</div>
+                    <div class="buttons">
+                        <button class="envoyer-commande-btn">Valider</button>
+                        <button class="payer-btn">Payer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script src="tablette.js"></script>
+
+</html>

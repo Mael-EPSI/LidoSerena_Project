@@ -1,0 +1,245 @@
+* {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+body {
+    background-color: #a6845f;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+#menus-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    width: 65%;
+}
+
+#produits-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    width: 65%;
+}
+
+button {
+    height: 100;
+    background-color: #333333;
+    border-radius: 10px;
+    margin: 5px;
+    color: white;
+    border-color: 3px, green;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.entreprise {
+    text-align: center;
+}
+
+.contenair {
+    display: flex;
+    flex-direction: row;
+}
+
+.divGauche {
+    width: 75%;
+    background-color: #d7aa7a;
+    margin-right: 20px;
+    margin-left: 20px;
+    border-radius: 10px;
+    padding-top: 10px;
+}
+
+
+.divDroite {
+    background-color: #d7aa7a;
+    margin-left: 10px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.separateur {
+    margin: 4px;
+}
+
+.table {
+    padding: 1%;
+}
+
+.section {
+    display: none;
+}
+
+.active {
+    display: block;
+}
+
+
+/* Styles du pop-up */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    /* Assure que le pop-up est au-dessus de tout */
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.popup button {
+    color: black;
+    margin: 10px;
+    padding: 8px 15px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+#popup-confirm {
+    background-color: #28a745;
+    color: white;
+}
+
+#popup-close {
+    background-color: #dc3545;
+    color: white;
+}
+
+.popup button:hover {
+    opacity: 0.8;
+}
+
+/* 🔹 Style général du pop-up */
+#menu-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 8px;
+    padding: 15px;
+    z-index: 1000;
+}
+
+/* 🔹 Titre compact */
+#popup-title {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* 🔹 Options en mode compact */
+.options-container {
+    display: flex;
+    flex-direction: column;
+    /* Liste verticale */
+    gap: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+    /* Ajout d'un défilement si trop d'éléments */
+}
+
+/* 🔹 Boutons de sélection plus petits */
+.option-btn {
+    font-size: 12px;
+    padding: 6px;
+    border: 1px solid #ddd;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    transition: 0.3s;
+    text-align: left;
+    width: 90%;
+    border-radius: 5px;
+}
+
+.option-btn:hover {
+    background-color: #dcdcdc;
+}
+
+.option-btn.selected {
+    background-color: #4CAF50;
+    color: white;
+    border-color: #388E3C;
+}
+
+/* 🔹 Conteneur compact pour les catégories */
+.category-section {
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+/* 🔹 Boutons Valider / Annuler */
+#popup-confirm,
+#popup-close {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+#popup-confirm {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
+
+#popup-close {
+    background-color: #ff4444;
+    color: white;
+    border: none;
+}
+
+#popup-confirm:hover {
+    background-color: #388E3C;
+}
+
+#popup-close:hover {
+    background-color: #cc0000;
+}
+
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #333;
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+.toast:hover {
+    opacity: 1;
+}
+
+.menu-product {
+    border-left: 4px solid #8b5e34;
+    padding-left: 10px;
+    margin: 5px 0;
+    position: relative;
+}
+
