@@ -25,14 +25,21 @@ git clone https://github.com/Mael-EPSI/LidoSerena_Project.git
 cd LidoSerena_Project
 ```
 
+
 2. **Configuration de la base de données**
 - Ouvrir phpMyAdmin (http://localhost/phpmyadmin)
 - Créer une nouvelle base de données nommée "lidoserena"
 - Importer le fichier `lidoserena.sql` fourni
 
-3. **Configuration du serveur web**
-- Placer le dossier du projet dans le répertoire `www` de WAMP
-- Redémarrer les services WAMP
+
+3. **Si besoin modifier Info connexion BDD**
+- Aller dans les fichiers: 
+  - api/bd.php
+  - rassou/admin/index.php
+  - rassou/admin/graphique.php
+
+- Modifier les Users et mots de passe si besoin
+
 
 4. **Vérification de l'installation**
 - Accéder à l'application via: http://localhost/LidoSerena_Project/lidoserena
