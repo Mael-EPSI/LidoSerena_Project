@@ -20,12 +20,12 @@ Une interface administrateur permet de **modifier les plats, menus et boissons**
 
 1. **Cloner le projet**
 ```bash
-git clone *************
+git clone https://github.com/Mael-EPSI/LidoSerena_Project.git
 cd LidoSerena
 ```
 
 2. **Configuration de la base de données**
-- Ouvrir phpMyAdmin ([http://localhost/phpmyadmin](https://github.com/Mael-EPSI/LidoSerena_Project.git))
+- Ouvrir phpMyAdmin (http://localhost/phpmyadmin)
 - Créer une nouvelle base de données nommée "lidoserena"
 - Importer le fichier `database.sql` fourni
 
