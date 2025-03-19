@@ -5,4 +5,4 @@ Le restaurant de plage **Lido Serena** souhaite moderniser son système de prise
 
 Une interface administrateur permet de **modifier les plats, menus et boissons** proposés à la carte, tandis qu'un **tableau de bord** aide la direction à suivre les tendances et optimiser la gestion du restaurant.
 
-Lors de l'installation et des test suivre le fichier RenduFinal.md dans LidoSerena
+**Lors de l'installation et des test suivre le fichier RenduFinal.md dans LidoSerena**
