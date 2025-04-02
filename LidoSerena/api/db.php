@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$dbname = 'lidoserena';
+$dbname = 'lidosererna';
 $username = 'root';
 $password = ''; // Remplace par ton vrai mot de passe
 

@@ -76,7 +76,7 @@
   <script>
     // Fonction pour charger les commandes via l'API
     function chargerCommandes() {
-      fetch(`${window.API_BASE_URL}/get_tout_produit.php`)
+      fetch(`http://localhost/Lidoserena_project/LidoSerena/api/get_tout_produit.php`)
         .then(response => response.json())
         .then(data => {
           console.log("Réponse API:", data);
@@ -143,7 +143,7 @@
         mode: mode  // "normal" ou "menu"
       };
 
-      fetch(`${window.API_BASE_URL}/marquer_produit_pret.php`, {
+      fetch(`http://localhost/Lidoserena_project/LidoSerena/api/marquer_produit_pret.php`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
@@ -163,7 +163,7 @@
     // Fonction pour marquer toute la commande comme prête
     function markCommandePret(commandeId) {
       const payload = { commande_id: commandeId };
-      fetch(`${window.API_BASE_URL}/marquer_commande_pret.php`, {
+      fetch(`http://localhost/Lidoserena_project/LidoSerena/api/marquer_commande_pret.php`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)

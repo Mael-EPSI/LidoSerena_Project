@@ -1,7 +1,7 @@
 <?php
 // 1) Connexion à la base de données
 $host = 'localhost';
-$dbname = 'lidoserena';
+$dbname = 'lidosererna';
 $username = 'root';
 $password = ''; // Remplace par ton vrai mot de passe
 
