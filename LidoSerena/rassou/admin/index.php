@@ -1,7 +1,7 @@
 <?php
 
 $host = 'localhost';
-$dbname = 'lidoserena';
+$dbname = 'lidosererna';
 $username = 'root';
 $password = ''; // Remplace par ton vrai mot de passe
 
@@ -293,7 +293,6 @@ $resultCategories = $conn->query($sqlCategories);
             ?>
         </tbody>
     </table>
-
     <h2 style="text-align: center;">Ajouter un Nouveau Plat</h2>
     <form action="" method="POST" style="width: 80%; margin: 0 auto;">
         <input type="text" name="plat" placeholder="Nom du plat" required><br><br>
