@@ -5,63 +5,134 @@
   <title>Cuisine - Commandes en cours</title>
   <link rel="stylesheet" href="https://use.typekit.net/lfx5uzg.css">
   <style>
+    :root {
+      --primary-color: #1B998B;
+      --secondary-color: #2D3047;
+      --accent-color: #FF9B71;
+      --background-color: #F7F7F2;
+      --text-color: #2D3047;
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+
     body {
-        background-color: #DDFFF7;
-        font-family: 'coolvetica';
-        color: #93E1D8;
-        text-align: center;
-      }
+      background-color: var(--background-color);
+      font-family: 'coolvetica', sans-serif;
+      color: var(--text-color);
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
     .commande {
-      border: 3px solid #93E1D8;
-      margin: 10px;
-      padding: 15px;
-      border-radius: 8px;
-      background-color: #eafffa;
-      /*proper css*/
+      border: none;
+      margin: 20px auto;
+      padding: 25px;
+      border-radius: 15px;
+      background-color: white;
+      box-shadow: var(--shadow);
+      max-width: 1000px;
+      transition: var(--transition);
+    }
+
+    .commande:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
     }
 
     table {
-      border-collapse: collapse;
+      border-collapse: separate;
+      border-spacing: 0;
       width: 100%;
-      margin-top: 10px;
-      border-radius: 8px;
+      margin-top: 20px;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
     }
 
-    th,
-    td {
-      border: 3px solid #93E1D8;
-      border-radius: 8px;
-      padding: 8px;
+    th, td {
+      border: 1px solid rgba(27, 153, 139, 0.2);
+      padding: 15px;
       text-align: center;
+      background: white;
     }
 
     th {
-      background-color: #eafffa;
+      background: var(--primary-color);
+      color: white;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
-  
+    tr:nth-child(even) td {
+      background: rgba(27, 153, 139, 0.05);
+    }
+
     h1 {
-      font-family: "revla-slab";
-      font-size: 70px;
-      color: #84CAC2;
+      font-family: "revla-slab", serif;
+      font-size: 3.5rem;
+      color: var(--primary-color);
+      margin: 40px 0;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     .commande h2 {
-      margin: 0 0 10px;
+      color: var(--secondary-color);
+      font-size: 1.5rem;
+      margin-bottom: 20px;
     }
 
-    .commande p {
-      margin: 5px 0;
+    .commande-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 15px;
     }
 
     button {
-      color: #588781;
-      font-family: 'coolvetica';
-      padding: 8px 12px;
-      font-size: 14px;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 12px 24px;
+      font-size: 1rem;
       cursor: pointer;
-      border-radius: 12px;
-      border-color: #588781;
+      border: none;
+      border-radius: 8px;
+      transition: var(--transition);
+      font-family: 'coolvetica', sans-serif;
+    }
+
+    button:hover {
+      background-color: var(--accent-color);
+      transform: translateY(-2px);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    #commandes-container {
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    @media (max-width: 768px) {
+      .commande-header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      .commande {
+        padding: 15px;
+        margin: 10px;
+      }
     }
   </style>
   <script type="module">
