@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon compte</title>
+</head>
+<body>
+    <div id="non-connecte">
+        <p>Vous n'êtes pas connecté.</p>
+        <a href="co_clients.html">Se connecter</a>
+    </div>
+    <div id="infos" hidden>
+        <h1>Mon compte</h1>
+        <p>Nom : <span id="champ-nom"></span></p>
+        <p>Prénom : <span id="champ-prenom"></span></p>
+        <p>Points : <span id="champ-points"></span></p>
+        <a href="../api/deconnexion_client.php">Se déconnecter</a>
+    </div>
+
+    <script>
+        fetch('../api/get_client.php')
+            .then(r => r.json())
+            .then(data => {
+                if (data.error) {
+                    document.getElementById('non-connecte').style.display = 'block';
+                } else {
+                    document.getElementById('champ-nom').textContent    = data.nom;
+                    document.getElementById('champ-prenom').textContent = data.prenom;
+                    document.getElementById('champ-points').textContent = data.points;
+                    document.getElementById('non-connecte').style.display = 'none';
+                    document.getElementById('infos').removeAttribute('hidden');
+                }
+            })
+            .catch(() => {
+                document.getElementById('non-connecte').style.display = 'block';
+            });
+    </script>
+</body>
+</html>
