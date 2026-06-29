@@ -11,7 +11,7 @@ let refreshInterval;
 let notificationInterval;
 
 function chargerProduits() {
-    fetch("http://localhost/LidoSerena_Project/lidoserena/api/produits.php")
+    fetch("http://127.0.0.1/LidoSerena/api/produits.php")
         .then(response => response.json())
         .then(data => {
             // Remplir productMap : association nom du produit -> prix
@@ -74,7 +74,7 @@ function chargerProduits() {
 
 // Fonction pour charger les menus depuis l'API
 function chargerMenus() {
-    fetch("http://localhost/LidoSerena_Project/lidoserena/api/get_menus.php")
+    fetch("http://127.0.0.1/LidoSerena/api/get_menus.php")
         .then(response => response.json())
         .then(data => {
             let container = document.getElementById("menus-container");
@@ -110,7 +110,7 @@ function chargerMenus() {
 }
 
 function chargerCommande() {
-    fetch("http://localhost/LidoSerena_Project/lidoserena/api/get_commande.php")
+    fetch("http://127.0.0.1/LidoSerena/api/get_commande.php")
         .then(response => response.json())
         .then(data => {
             if (data.success) {
@@ -267,7 +267,7 @@ function ajouterMenuAuPanier() {
     console.log("🛠️ Catégories du menu sélectionné :", categoriesAutorisees);
 
     // Récupérer les plats correspondants
-    fetch("http://localhost/LidoSerena_Project/lidoserena/api/produits.php")
+    fetch("http://127.0.0.1/LidoSerena/api/produits.php")
         .then(response => response.json())
         .then(data => {
             let produitsFiltres = data.filter(produit => categoriesAutorisees.includes(parseInt(produit.categorie_id)));
@@ -485,7 +485,7 @@ function envoyerCommande() {
     console.log("📤 Données envoyées à l'API :", JSON.stringify(payload, null, 2));
 
     // 🔹 Envoi des données à l'API
-    fetch("http://localhost/LidoSerena_Project/lidoserena/api/envoyer_commande.php", {
+    fetch("http://127.0.0.1/LidoSerena/api/envoyer_commande.php", {
         method: "POST",
         mode: "cors",
         headers: { "Content-Type": "application/json" },
@@ -507,73 +507,83 @@ function envoyerCommande() {
     .catch(error => console.error("❌ Erreur fetch :", error));
 }
 
-// Fonction pour gérer le paiement avec double confirmation
+// Paiement avec sélection du serveur
 document.addEventListener('click', function (event) {
-    if (event.target.classList.contains('payer-btn')) {
-        const button = event.target;
-        const activeSection = document.querySelector('.section.active');
-        if (!activeSection) return;
+    if (!event.target.classList.contains('payer-btn')) return;
 
-        const tableId = activeSection.dataset.tableId;
-        if (!tableId || !commandes[tableId] || commandes[tableId].length === 0) {
-            alert("Aucune commande active pour cette table.");
-            return;
-        }
+    const activeSection = document.querySelector('.section.active');
+    if (!activeSection) return;
 
-        // Récupérer la dernière commande pour cette table
-        const dernierCommande = commandes[tableId][commandes[tableId].length - 1];
-        const commandeId = dernierCommande.commande_id;
+    const tableId = activeSection.dataset.tableId;
+    if (!tableId || !commandes[tableId] || commandes[tableId].length === 0) {
+        alert("Aucune commande active pour cette table.");
+        return;
+    }
 
-        console.log("🔍 ID de la table et de la commande :", tableId, commandeId);
-        
-        if (!commandeId) {
-            alert("Impossible de trouver l'ID de la commande.");
-            return;
-        }
+    const dernierCommande = commandes[tableId][commandes[tableId].length - 1];
+    const commandeId = dernierCommande.commande_id;
+    if (!commandeId) {
+        alert("Impossible de trouver l'ID de la commande.");
+        return;
+    }
 
-        const totalElement = activeSection.querySelector('.total');
-        const commandeContainer = activeSection.querySelector('.commande');
+    const totalElement = activeSection.querySelector('.total');
+    const commandeContainer = activeSection.querySelector('.commande');
 
-        if (button.dataset.confirmed === "true") {
-            // Confirmation : on envoie la requête pour marquer la commande comme payée
-            fetch("http://localhost/LidoSerena_Project/lidoserena/api/payer.php", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ commande_id: commandeId })
-            })
-                .then(response => response.json())
+    // Charger la liste des serveurs et ouvrir le popup
+    fetch("http://127.0.0.1/LidoSerena/api/get_serveurs.php")
+        .then(r => r.json())
+        .then(serveurs => {
+            const popup = document.getElementById('serveur-popup');
+            const liste = document.getElementById('serveur-liste');
+            liste.innerHTML = '';
+
+            let serveurIdSelectionne = null;
+
+            serveurs.forEach(s => {
+                const btn = document.createElement('button');
+                btn.textContent = s.username;
+                btn.dataset.id = s.id;
+                btn.addEventListener('click', function () {
+                    liste.querySelectorAll('button').forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                    serveurIdSelectionne = s.id;
+                });
+                liste.appendChild(btn);
+            });
+
+            popup.style.display = 'flex';
+
+            document.getElementById('serveur-annuler').onclick = () => {
+                popup.style.display = 'none';
+            };
+
+            document.getElementById('serveur-confirmer').onclick = () => {
+                if (!serveurIdSelectionne) {
+                    alert("Veuillez sélectionner un serveur.");
+                    return;
+                }
+                popup.style.display = 'none';
+
+                fetch("http://127.0.0.1/LidoSerena/api/payer.php", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ commande_id: commandeId, serveur_id: serveurIdSelectionne })
+                })
+                .then(r => r.json())
                 .then(data => {
                     if (data.success) {
-                        console.log("Commande payée avec succès !");
-                        // Mettre à jour l'affichage
                         totalElement.textContent = 'Total : 0€';
-                        if (commandeContainer) {
-                            commandeContainer.innerHTML = "";
-                        }
-                        // Mettre à jour les commandes locales
+                        commandeContainer.innerHTML = '';
                         delete commandes[tableId];
                     } else {
-                        alert("Erreur lors du paiement: " + data.message);
+                        alert("Erreur paiement : " + data.message);
                     }
                 })
-                .catch(error => {
-                    console.error("Erreur fetch:", error);
-                    alert("Erreur lors du paiement. Veuillez réessayer.");
-                });
-
-            button.dataset.confirmed = "false";
-            button.textContent = "Payer";
-        } else {
-            button.dataset.confirmed = "true";
-            button.textContent = "Cliquez à nouveau pour confirmer";
-            setTimeout(() => {
-                if (button.dataset.confirmed === "true") {
-                    button.dataset.confirmed = "false";
-                    button.textContent = "Payer";
-                }
-            }, 5000);
-        }
-    }
+                .catch(() => alert("Erreur lors du paiement."));
+            };
+        })
+        .catch(() => alert("Impossible de charger les serveurs."));
 });
 
 // Fonction pour afficher une section active
@@ -587,7 +597,7 @@ function showSection(sectionId) {
 
 // Fonction pour afficher une notification toast cliquable
 function showToastNotification() {
-    fetch('http://localhost/LidoSerena_Project/lidoserena/api/get_notification.php')
+    fetch('http://127.0.0.1/LidoSerena/api/get_notification.php')
       .then(response => response.json())
       .then(data => {
         if (!data.success || !data.notifications || data.notifications.length === 0) {
@@ -607,7 +617,7 @@ function showToastNotification() {
         toast.innerText = message;
   
         toast.addEventListener('click', () => {
-          fetch('http://localhost/LidoSerena_Project/lidoserena/api/marquer_lu.php', {
+          fetch('http://127.0.0.1/LidoSerena/api/marquer_lu.php', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
