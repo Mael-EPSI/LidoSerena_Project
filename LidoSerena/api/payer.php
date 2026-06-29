@@ -15,11 +15,11 @@ if (!isset($data['commande_id'])) {
 }
 
 $commande_id = $data['commande_id'];
+$serveur_id  = $data['serveur_id'] ?? null;
 
 try {
-    // Mettre à jour le statut de la commande en "payé"
-    $stmt = $pdo->prepare("UPDATE commandes SET statut = 'payé' WHERE id = ?");
-    $stmt->execute([$commande_id]);
+    $stmt = $pdo->prepare("UPDATE commandes SET statut = 'payé', serveur_id = ? WHERE id = ?");
+    $stmt->execute([$serveur_id, $commande_id]);
 
     echo json_encode(["success" => true, "message" => "Commande payée avec succès"]);
 } catch (Exception $e) {
